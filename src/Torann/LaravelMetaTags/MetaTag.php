@@ -144,9 +144,8 @@ class MetaTag
             'href' => $this->request->url()
         ]);
 
-        foreach ($this->config['locales'] as $value)
-        {
-            // Turn current URL into a localized URL
+        foreach ($this->config['locales'] as $value) {
+        // Turn current URL into a localized URL
             // using the given lang code
             $url = $this->localizedURL($value);
 
@@ -174,9 +173,8 @@ class MetaTag
             ])
         ];
 
-        foreach ($this->og as $tag)
-        {
-            // Get value for tag, default to dynamically set value
+        foreach ($this->og as $tag) {
+        // Get value for tag, default to dynamically set value
             $value = array_get($this->config['open_graph'], $tag, $this->get($tag));
 
             if ($value) {
@@ -199,9 +197,8 @@ class MetaTag
     {
         $html = [];
 
-        foreach ($this->twitter as $tag)
-        {
-            // Get value for tag, default to dynamically set value
+        foreach ($this->twitter as $tag) {
+        // Get value for tag, default to dynamically set value
             $value = array_get($this->config['twitter'], $tag, $this->get($tag));
 
             if ($value && !isset($html[$tag])) {
@@ -242,8 +239,7 @@ class MetaTag
         if ($title && $this->config['title_limit']) {
             $title = ' - '.$title;
             $limit = $this->config['title_limit'] - strlen($title);
-        }
-        else {
+        } else {
             $limit = 'title';
         }
 
@@ -258,7 +254,7 @@ class MetaTag
      */
     private function createTag(array $values)
     {
-        $attributes = array_map(function($key) use ($values) {
+        $attributes = array_map(function ($key) use ($values) {
             $value = $this->fix($values[$key]);
             return "{$key}=\"{$value}\"";
         }, array_keys($values));
@@ -289,11 +285,9 @@ class MetaTag
     {
         if (is_string($key) && isset($this->config[$key.'_limit'])) {
             $limit = $this->config[$key.'_limit'];
-        }
-        else if (is_integer($key)) {
+        } else if (is_integer($key)) {
             $limit = $key;
-        }
-        else {
+        } else {
             return $text;
         }
 

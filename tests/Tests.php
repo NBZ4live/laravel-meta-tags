@@ -80,7 +80,7 @@ class Tests extends PHPUnit_Framework_TestCase
         $this->assertTrue($text === $response);
 
         for ($i = 0; $i < 5; $i++) {
-            $response = $this->Meta->meta('image', $text =self::text(80));
+            $response = $this->Meta->meta('image', $text = self::text(80));
 
             if ($i > 2) {
                 $this->assertTrue($response === null);

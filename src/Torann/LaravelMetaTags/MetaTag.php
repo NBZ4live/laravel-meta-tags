@@ -12,36 +12,36 @@ class MetaTag
      *
      * @var \Illuminate\Http\Request
      */
-    private $request;
+    protected $request;
 
     /**
      * @var array
      */
-    private $config = [];
+    protected $config = [];
 
     /**
      * Locale default for app.
      *
      * @var string
      */
-    private $defaultLocale = '';
+    protected $defaultLocale = '';
 
     /**
      * @var array
      */
-    private $metas = [];
+    protected $metas = [];
 
     /**
      * @var string
      */
-    private $title;
+    protected $title;
 
     /**
      * OpenGraph elements
      *
      * @var array
      */
-    private $og = [
+    protected $og = [
         'title', 'description', 'type', 'image', 'url', 'audio',
         'determiner', 'locale', 'site_name', 'video'
     ];
@@ -51,7 +51,7 @@ class MetaTag
      *
      * @var array
      */
-    private $twitter = [
+    protected $twitter = [
         'card', 'site', 'title', 'description',
         'creator', 'image:src', 'domain'
     ];
@@ -235,7 +235,7 @@ class MetaTag
      * @param  string $value
      * @return string
      */
-    private function setTitle($value)
+    protected function setTitle($value)
     {
         $title = $this->title;
 
@@ -256,7 +256,7 @@ class MetaTag
      * @param  array $values
      * @return string
      */
-    private function createTag(array $values)
+    protected function createTag(array $values)
     {
         $attributes = array_map(function($key) use ($values) {
             $value = $this->fix($values[$key]);
@@ -272,7 +272,7 @@ class MetaTag
      * @param  string $text
      * @return string
      */
-    private function fix($text)
+    protected function fix($text)
     {
         $text = preg_replace('/<[^>]+>/', ' ', $text);
         $text = preg_replace('/[\r\n\s]+/', ' ', $text);
@@ -285,7 +285,7 @@ class MetaTag
      * @param  string $key
      * @return string
      */
-    private function cut($text, $key)
+    protected function cut($text, $key)
     {
         if (is_string($key) && isset($this->config[$key.'_limit'])) {
             $limit = $this->config[$key.'_limit'];
@@ -318,7 +318,7 @@ class MetaTag
      * @param  string $locale
      * @return string
      */
-    private function localizedURL($locale)
+    protected function localizedURL($locale)
     {
         // Default language doesn't get a special subdomain
         $locale = ($locale !== $this->defaultLocale) ? strtolower($locale).'.' : '';
